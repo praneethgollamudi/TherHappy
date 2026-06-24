@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Navigation from '@/components/Navigation';
+import { AuthProvider } from '@/components/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'TherHappy — Your Mental Wellness Companion',
@@ -21,10 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#7c3aed" />
       </head>
       <body className="min-h-screen">
-        <Navigation />
-        <main className="pb-24 md:pb-8 md:pl-64 pt-0 md:pt-0">
-          {children}
-        </main>
+        <AuthProvider>
+          <Navigation />
+          <main className="pb-24 md:pb-8 md:pl-64 pt-0">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );

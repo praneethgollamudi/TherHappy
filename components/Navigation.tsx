@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, MessageCircle, BookOpen, Wind, LifeBuoy, BarChart2, Heart } from 'lucide-react';
+import { Home, MessageCircle, BookOpen, Wind, LifeBuoy, BarChart2, Heart, LogOut } from 'lucide-react';
+import { useAuth } from '@/components/AuthProvider';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home', icon: Home },
@@ -15,6 +16,11 @@ const NAV_ITEMS = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { user, signOut } = useAuth();
+
+  if (pathname === '/auth') return null;
+
+  const initial = user?.email?.charAt(0).toUpperCase() ?? '?';
 
   return (
     <>
@@ -52,7 +58,24 @@ export default function Navigation() {
           })}
         </nav>
 
-        <div className="p-4 m-4 rounded-2xl bg-gradient-to-br from-lavender-50 to-pink-50 border border-lavender-100">
+        {/* User + logout */}
+        <div className="p-4 border-t border-lavender-100">
+          <div className="flex items-center gap-3 px-3 py-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-lavender-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-sm font-bold">{initial}</span>
+            </div>
+            <p className="text-xs text-slate-500 flex-1 truncate">{user?.email}</p>
+            <button
+              onClick={signOut}
+              title="Sign out"
+              className="text-slate-300 hover:text-rose-500 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        <div className="p-4 mx-4 mb-4 rounded-2xl bg-gradient-to-br from-lavender-50 to-pink-50 border border-lavender-100">
           <p className="text-xs font-semibold text-lavender-700 mb-1">Need help now?</p>
           <p className="text-xs text-slate-500 mb-2">Crisis support is available 24/7.</p>
           <a
