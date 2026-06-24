@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gradient-start: #f5f3ff;
+  --gradient-mid: #fdf4ff;
+  --gradient-end: #fff1f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+  min-height: 100vh;
+  color: #1e1b4b;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glass card effect */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4b5fd;
+  border-radius: 3px;
+}
+
+/* Custom textarea */
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+/* Breathing circle */
+.breathing-circle {
+  transition: transform 0.1s ease;
+}
+
+/* Message bubbles */
+.message-bubble-user {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+}
+
+.message-bubble-aria {
+  background: white;
+  border: 1px solid #ede9fe;
+}
+
+/* Mood emoji hover */
+.mood-btn:hover .mood-emoji {
+  transform: scale(1.2);
+}
+
+/* Feature card hover */
+.feature-card {
+  transition: all 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Nav link active */
+.nav-link-active {
+  color: #7c3aed;
+  background: #ede9fe;
+}
+
+/* Typing dots animation */
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Bottom nav safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-blur {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
